@@ -1,0 +1,43 @@
+[default]
+DEBUG = false
+CSRF_ENABLED = true
+SQLALCHEMY_TRACK_MODIFICATIONS = false
+TITLE = "Fizz Buzz Bot"
+FLASK_ADMIN_NAME = "Fizz Buzz Bot"
+FLASK_ADMIN_TEMPLATE_MODE = "bootstrap3"
+
+EXTENSIONS = [ 
+    "fizzbuzz.ext.database:init_app",
+    "fizzbuzz.ext.commands:init_app",
+    "fizzbuzz.ext.appearance:init_app",
+    "fizzbuzz.ext.log:init_app",
+    "fizzbuzz.ext.token:init_app", 
+    "fizzbuzz.ext.auth:init_app",
+    "fizzbuzz.ext.admin:init_app",
+    "fizzbuzz.blueprints.restapi:init_app",
+]
+
+[development]
+DEVELOPMENT = true
+DEBUG = true
+SQLALCHEMY_TRACK_MODIFICATIONS = true
+SQLALCHEMY_DATABASE_URI="postgresql://localhost/fizzbuzz" 
+
+[staging]
+DEVELOPMENT = true
+DEBUG = true
+
+[testing]
+DEBUG = true
+TESTING = true 
+SQLALCHEMY_TRACK_MODIFICATIONS = true 
+SQLALCHEMY_DATABASE_URI="postgresql://localhost/fizzbuzz_test"
+JWT_SECRET_KEY = "s3cr3t"
+
+[ci]
+SQLALCHEMY_DATABASE_URI="postgresql://postgres:postgres@localhost:5432/fizzbuzz_test"
+JWT_SECRET_KEY = "s3cr3t" 
+
+[production]
+DEBUG = false 
+SQLALCHEMY_DATABASE_URI="postgresql://fizzbuzz:fizzbuzz@localhost:5432/fizzbuzz"
