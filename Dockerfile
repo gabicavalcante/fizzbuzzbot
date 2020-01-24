@@ -23,14 +23,21 @@ ENV PYTHONDONTWRITEBYTECODE 1
 # Prevents Python from buffering stdout and stderr 
 ENV PYTHONUNBUFFERED 1
 
-RUN apk add --update \
-    python \
-    python-dev \
-    py-pip \
-    build-base 
+RUN apk update
+RUN set -e; \
+    apk add --no-cache --virtual .build-deps \
+    gcc \
+    libc-dev \
+    linux-headers \
+    mariadb-dev \
+    python3-dev \
+    postgresql-dev \
+    ;
+
+RUN apk add --no-cache mysql-client
+
 
 # Using pip:
-RUN pip install --upgrade pip 
 RUN pip install -r requirements.txt 
-RUN flask db upgrade
-RUN flask run
+
+ENTRYPOINT ["mysql"]

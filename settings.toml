@@ -21,7 +21,7 @@ EXTENSIONS = [
 DEVELOPMENT = true
 DEBUG = true
 SQLALCHEMY_TRACK_MODIFICATIONS = true
-SQLALCHEMY_DATABASE_URI="mysql://localhost/fizzbuzz" 
+SQLALCHEMY_DATABASE_URI="mysql://root:p@ssw0rd123@localhost/fizzbuzz" 
 
 [staging]
 DEVELOPMENT = true
@@ -31,7 +31,7 @@ DEBUG = true
 DEBUG = true
 TESTING = true 
 SQLALCHEMY_TRACK_MODIFICATIONS = true 
-SQLALCHEMY_DATABASE_URI="mysql://localhost/fizzbuzz_test"
+SQLALCHEMY_DATABASE_URI="postgresql://localhost/fizzbuzz_test"
 JWT_SECRET_KEY = "s3cr3t"
 
 [ci]
@@ -40,4 +40,4 @@ JWT_SECRET_KEY = "s3cr3t"
 
 [production]
 DEBUG = false 
-SQLALCHEMY_DATABASE_URI="mysql://fizzbuzz:fizzbuzz@localhost:5432/fizzbuzz"
+SQLALCHEMY_DATABASE_URI="mysql://root:p@ssw0rd123@localhost/fizzbuzz"

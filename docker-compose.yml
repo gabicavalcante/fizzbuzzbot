@@ -1,24 +1,21 @@
 version: "3"
 services:
   mysql:
-    container_name: mysql
     command: --default-authentication-plugin=mysql_native_password
     image: mysql:5.7
     ports:
       - "3306:3306"
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_USER=fizzbuzz
-      - MYSQL_PASSWORD=f1zzbuzz
-      - MYSQL_DATABASE=fizzbuzz
+      MYSQL_ROOT_PASSWORD: p@ssw0rd123
+      MYSQL_DATABASE: fizzbuzz
+    volumes:
+      - /var/lib/mysql
 
   fizzbuzz:
-    build: .
-    depends_on:
-      - mysql
+    image: python:3.7
     links:
-      - mysql:mysql
+      - mysql
     env_file:
       - .env
     ports:
@@ -28,3 +25,8 @@ services:
     restart: always
     environment:
       FLASK_ENV: "production"
+    command: >
+      bash -c "cd /fizzbuzz && 
+      pip install -r requirements.txt && 
+      flask db upgrade && 
+      flask run"
