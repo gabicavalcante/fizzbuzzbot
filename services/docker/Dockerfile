@@ -23,23 +23,9 @@ ENV PYTHONDONTWRITEBYTECODE 1
 # Prevents Python from buffering stdout and stderr 
 ENV PYTHONUNBUFFERED 1
 
-# install dependencies
-RUN apk update \
-    && apk add postgresql-dev gcc python3-dev libffi-dev  musl-dev
-
 # Using pip:
 RUN pip install --upgrade pip
 RUN pip install gunicorn
 RUN pip install -r requirements.txt 
-
-#RUN cp .env.sample .env
-#RUN cp .secrets.toml.sample .secrets.toml
-
-# run entrypoint.sh
-CMD ["/entrypoint.sh"]
-
-# Using pipenv:
-#RUN pip install pipenv
-#RUN pipenv install --ignore-pipfile
-#CMD ["pipenv", "run", "python3", "-m", "fizzbuzz"]
-
+RUN flask db upgrade
+RUN flask run
