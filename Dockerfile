@@ -11,11 +11,11 @@ FROM python:3.8.0-alpine
 LABEL Name=fizzbuzz Version=0.0.1
 EXPOSE 5000
 
-# copy project
-COPY . /fizzbuzz
-
 # set work directory
 WORKDIR /fizzbuzz 
+
+# copy project
+COPY . /fizzbuzz
 
 # set environment variables
 # Prevents Python from writing pyc files to disc 
@@ -23,9 +23,14 @@ ENV PYTHONDONTWRITEBYTECODE 1
 # Prevents Python from buffering stdout and stderr 
 ENV PYTHONUNBUFFERED 1
 
+RUN apk add --update \
+    python \
+    python-dev \
+    py-pip \
+    build-base 
+
 # Using pip:
-RUN pip install --upgrade pip
-RUN pip install gunicorn
+RUN pip install --upgrade pip 
 RUN pip install -r requirements.txt 
 RUN flask db upgrade
 RUN flask run

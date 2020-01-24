@@ -3,10 +3,6 @@
 ![Build Status](https://github.com/gabicavalcante/fizzbuzzbot/workflows/CI/badge.svg)
 [![Code Coverage](https://codecov.io/gh/gabicavalcante/fizzbuzzbot/branch/master/graphs/badge.svg)](https://codecov.io/gh/gabicavalcante/fizzbuzz)
 
-### makefile
-
-We made a `makefile` to help you with you setup project. Check the file to see all commands availables.
-
 ### create and active virtualenv
 
 ```
