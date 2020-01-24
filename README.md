@@ -1,7 +1,7 @@
 # Flask - Fizz Buzz Bot
 
 ![Build Status](https://github.com/gabicavalcante/fizzbuzzbot/workflows/CI/badge.svg)
-[![Code Coverage](https://codecov.io/gh/gabicavalcante/fizzbuzzbot/branch/master/graphs/badge.svg?token=BlrDDl2SJq)](https://codecov.io/gh/gabicavalcante/fizzbuzz)
+[![Code Coverage](https://codecov.io/gh/gabicavalcante/fizzbuzzbot/branch/master/graphs/badge.svg)](https://codecov.io/gh/gabicavalcante/fizzbuzz)
 
 ### makefile
 
