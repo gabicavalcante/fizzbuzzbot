@@ -17,6 +17,8 @@ services:
       - db
     env_file:
       - .env
+    expose:
+      - 5000
     ports:
       - "5000:5000"
     volumes:
@@ -28,4 +30,4 @@ services:
       bash -c "cd /fizzbuzz && 
       pip install -r requirements.txt && 
       flask db upgrade && 
-      flask run"
+      flask run --host 0.0.0.0"

@@ -11,7 +11,6 @@ logger = logging.getLogger(__name__)
 
 
 @chat_blueprint.route("/all", methods=["GET"])
-@login_required
 def get_chats():
     try:
         chats = Chat.query.all()
