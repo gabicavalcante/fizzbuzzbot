@@ -21,7 +21,7 @@ EXTENSIONS = [
 DEVELOPMENT = true
 DEBUG = true
 SQLALCHEMY_TRACK_MODIFICATIONS = true
-SQLALCHEMY_DATABASE_URI="mysql://root:p@ssw0rd123@localhost/fizzbuzz" 
+SQLALCHEMY_DATABASE_URI="mysql://root:p@ssw0rd123@db/fizzbuzz" 
 
 [staging]
 DEVELOPMENT = true
@@ -40,4 +40,4 @@ JWT_SECRET_KEY = "s3cr3t"
 
 [production]
 DEBUG = false 
-SQLALCHEMY_DATABASE_URI="mysql://root:p@ssw0rd123@localhost/fizzbuzz"
+SQLALCHEMY_DATABASE_URI="mysql://root:p@ssw0rd123@db/fizzbuzz"
