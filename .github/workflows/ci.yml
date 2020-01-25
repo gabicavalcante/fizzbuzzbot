@@ -12,18 +12,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    services:
-      postgres:
-        image: postgres:11
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: fizzbuzz_test
-        ports:
-          - 5432:5432
-        # needed because the postgres container does not provide a healthcheck
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-
     steps:
       - uses: actions/checkout@v1
       - name: Set up Python 3.7
@@ -36,10 +24,15 @@ jobs:
           sudo apt-get install libmysqlclient-dev
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install psycopg2
           pip install -r requirements-dev.txt
           cp .env.sample .env
           cp .secrets.toml.sample .secrets.toml
+      - name: Set up MySQL 5.7
+        uses: mirromutth/mysql-action@master
+        with:
+          mysql version: 5.7
+          mysql database: fizzbuzz
+          mysql root password: p@ssw0rd123@db
       - name: Lint with flake8
         run: |
           pip install flake8
