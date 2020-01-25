@@ -35,7 +35,7 @@ SQLALCHEMY_DATABASE_URI="postgresql://localhost/fizzbuzz_test"
 JWT_SECRET_KEY = "s3cr3t"
 
 [ci]
-SQLALCHEMY_DATABASE_URI="mysql://root:p@ssw0rd123@localhost/fizzbuzz"
+SQLALCHEMY_DATABASE_URI="mysql://root:root@localhost/fizzbuzz"
 JWT_SECRET_KEY = "s3cr3t" 
 
 [production]
