@@ -33,7 +33,7 @@ jobs:
         uses: mirromutth/mysql-action@master
         with:
           mysql version: 5.7
-          mysql database: fizzbuzz
+          mysql database: fizzbuzz_test
           mysql root password: p@ssw0rd123@db
       - name: Lint with flake8
         run: |
