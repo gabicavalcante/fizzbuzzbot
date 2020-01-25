@@ -31,11 +31,11 @@ DEBUG = true
 DEBUG = true
 TESTING = true 
 SQLALCHEMY_TRACK_MODIFICATIONS = true 
-SQLALCHEMY_DATABASE_URI="postgresql://localhost/fizzbuzz_test"
+SQLALCHEMY_DATABASE_URI="mysql://root:p@ssw0rd123@0.0.0.0:33306/fizzbuzz_test"
 JWT_SECRET_KEY = "s3cr3t"
 
 [ci]
-SQLALCHEMY_DATABASE_URI="mysql://root:p@ssw0rd123@db/fizzbuzz_test"
+SQLALCHEMY_DATABASE_URI="mysql://root:p@ssw0rd123@0.0.0.0:33306/fizzbuzz_test"
 JWT_SECRET_KEY = "s3cr3t"
 
 [production]
