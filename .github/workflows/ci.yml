@@ -27,6 +27,14 @@ jobs:
           pip install -r requirements-dev.txt
           cp .env.sample .env
           cp .secrets.toml.sample .secrets.toml
+      - name: Shutdown Ubuntu MySQL
+        run: sudo service mysql stop
+      - name: Set up MySQL 5.7
+        uses: mirromutth/mysql-action@master
+        with:
+          mysql version: 5.7
+          mysql database: fizzbuzz
+          mysql root password: p@ssw0rd123@db
       - name: Lint with flake8
         run: |
           pip install flake8
