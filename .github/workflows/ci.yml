@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
-      mysql:
+      db:
         image: mysql:5.7
         env:
           MYSQL_ROOT_PASSWORD: p@ssw0rd123
