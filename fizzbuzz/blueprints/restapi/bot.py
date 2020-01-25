@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 bot = telegram.Bot(token=settings.get("TELEGRAM_BOT_TOKEN"))
 
 
-def get_response() -> str:
+def get_response(text: str) -> str:
     return "hello"
 
 
@@ -38,8 +38,9 @@ def set_webhook():
     hook = "{URL}/{HOOK}".format(
         URL=settings.get("BOT_HOST"), HOOK=settings.get("TELEGRAM_BOT_TOKEN")
     )
+    logger.debug(hook)
     s = bot.set_webhook(hook)
-    # something to let us know things work
+
     if s:
         return jsonify({"message": "webhook setup ok"}), 200
     else:
