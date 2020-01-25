@@ -10,7 +10,11 @@ bot = telegram.Bot(token=settings.get("TELEGRAM_BOT_TOKEN"))
 
 
 def get_response(text: str) -> str:
-    return "hello"
+    try:
+        number = int(text)
+        return "Fizz" * (number % 3 == 0) + "Buzz" * (number % 5 == 0) or number
+    except ValueError:
+        return f"Hey, '{text}' is not a valid input :("
 
 
 @bot_blueprint.route(f"/{settings.get('TELEGRAM_BOT_TOKEN')}", methods=["POST"])
@@ -28,7 +32,7 @@ def respond():
     response = get_response(text)
     bot.sendMessage(chat_id=chat_id, text=response, reply_to_message_id=msg_id)
 
-    return jsonify("ok"), 200
+    return jsonify({"message": "message send"}), 200
 
 
 @bot_blueprint.route("/setwebhook", methods=["GET", "POST"])
