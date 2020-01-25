@@ -1,20 +1,20 @@
 import telegram
 import logging
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 from dynaconf import settings
 
-bot_blueprint = Blueprint("bot", __name__, url_prefix="/bot")
+bot_blueprint = Blueprint("bot", __name__, url_prefix="/")
 logger = logging.getLogger(__name__)
+
+bot = telegram.Bot(token=settings.get("TELEGRAM_BOT_TOKEN"))
 
 
 def get_response() -> str:
     return "hello"
 
 
-@bot_blueprint.route("/{}".format(settings.get("TELEGRAM_TOKEN")), methods=["POST"])
+@bot_blueprint.route(f"/{settings.get('TELEGRAM_BOT_TOKEN')}", methods=["POST"])
 def respond():
-    bot = telegram.Bot(token=settings.get("TELEGRAM_TOKEN"))
-
     # retrieve the message in JSON and then transform it to Telegram object
     update = telegram.Update.de_json(request.get_json(force=True), bot)
 
@@ -23,9 +23,24 @@ def respond():
 
     # Telegram understands UTF-8, so encode text for unicode compatibility
     text = update.message.text.encode("utf-8").decode()
-    print("got text message :", text)
+    logger.info("Update received! {text}")
 
     response = get_response(text)
     bot.sendMessage(chat_id=chat_id, text=response, reply_to_message_id=msg_id)
 
-    return "ok"
+    return jsonify("ok"), 200
+
+
+@bot_blueprint.route("/setwebhook", methods=["GET", "POST"])
+def set_webhook():
+    # we use the bot object to link the bot to our app which live
+    # in the link provided by URL
+    hook = "{URL}/{HOOK}".format(
+        URL=settings.get("BOT_HOST"), HOOK=settings.get("TELEGRAM_BOT_TOKEN")
+    )
+    s = bot.set_webhook(hook)
+    # something to let us know things work
+    if s:
+        return jsonify({"message": "webhook setup ok"}), 200
+    else:
+        return jsonify({"message": "webhook setup failed"}), 200
