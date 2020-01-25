@@ -6,7 +6,9 @@ from dynaconf import settings
 bot_blueprint = Blueprint("bot", __name__, url_prefix="/")
 logger = logging.getLogger(__name__)
 
-bot = telegram.Bot(token=settings.get("TELEGRAM_BOT_TOKEN"))
+bot = None
+if settings.current_env != "ci":
+    bot = telegram.Bot(token=settings.get("TELEGRAM_BOT_TOKEN"))
 
 
 def get_response(text: str) -> str:
