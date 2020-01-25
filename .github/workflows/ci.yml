@@ -12,6 +12,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: p@ssw0rd123@db
+          MYSQL_DATABASE: fizzbuzz_test
+        ports:
+          - 33306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
     steps:
       - uses: actions/checkout@v1
       - name: Set up Python 3.7
@@ -27,14 +37,6 @@ jobs:
           pip install -r requirements-dev.txt
           cp .env.sample .env
           cp .secrets.toml.sample .secrets.toml
-      - name: Shutdown Ubuntu MySQL
-        run: sudo service mysql stop
-      - name: Set up MySQL 5.7
-        uses: mirromutth/mysql-action@master
-        with:
-          mysql version: 5.7
-          mysql database: fizzbuzz_test
-          mysql root password: p@ssw0rd123@db
       - name: Lint with flake8
         run: |
           pip install flake8
