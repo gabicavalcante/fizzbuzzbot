@@ -18,5 +18,6 @@ def create_app(**config) -> Flask:
     """
 
     app = minimal_app(**config)
+    app.config["SECRET_KEY"] = "7e1b447b-568d-445f-bf68-b80d35d9d3fb"
     configuration.load_extensions(app)
     return app
