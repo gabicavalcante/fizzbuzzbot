@@ -63,15 +63,22 @@ class Chat(db.Model):
     user = db.Column(db.String(120))
     message = db.Column(db.Text, nullable=False)
     response = db.Column(db.Text, nullable=False)
+    details = db.Column(db.JSON, nullable=True, default={})
 
     created_at = db.Column(
         db.DateTime, default=db.func.current_timestamp(), nullable=False
     )
 
-    def __init__(self, user: str, message: str, response: str):
+    def __init__(self, user: str, message: str, response: str, details={}):
         self.user = user
         self.message = message
         self.response = response
+        self.details = details
+
+    @staticmethod
+    def save(user: str, message: str, response: str, details={}):
+        chat = Chat(user, message, response, details)
+        db.session.add(chat)
 
     def __repr__(self) -> str:
         return f"<Chat (id={self.id}, user={self.user}, message={self.message})>"

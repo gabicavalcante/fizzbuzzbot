@@ -2,6 +2,7 @@ import telegram
 import logging
 from flask import Blueprint, request, jsonify
 from dynaconf import settings
+from fizzbuzz.models import Chat
 
 bot_blueprint = Blueprint("bot", __name__, url_prefix="/")
 logger = logging.getLogger(__name__)
@@ -25,6 +26,7 @@ def respond():
     update = telegram.Update.de_json(request.get_json(force=True), bot)
 
     chat_id = update.message.chat.id
+    user = update.message.chat.username
     msg_id = update.message.message_id
 
     # Telegram understands UTF-8, so encode text for unicode compatibility
@@ -32,6 +34,8 @@ def respond():
     logger.info("Update received! {text}")
 
     response = get_response(text)
+
+    Chat.save(user, text, response, update)
     bot.sendMessage(chat_id=chat_id, text=response, reply_to_message_id=msg_id)
 
     return jsonify({"message": "message send"}), 200
