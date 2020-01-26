@@ -26,28 +26,36 @@ _note_: `requirements-dev.txt` has all requirements packages to test, coverage a
 ### create and configure .env file
 
 ```
-$ touch .env
+$ cp .env.sample .env
 ```
 
 add the env vars:
 
 ```
-FLASK_APP=fizzbuzz.app
-FLASK_ENV='development'
-FLASK_DEBUG=1
-SECRET_KEY="s3cr3t"
-DATABASE_URL="postgresql://localhost/fizzbuzz_db"
+FLASK_APP=fizzbuzz.app:create_app
+SECRET_KEY="71b40786-c246-47c9-b3b1-cabe6917e0f6"
+FLASK_ENV=development
+```
+
+### create and configure .secrets.toml
+
+```
+$ cp .secrets.toml.sample .secrets.toml
+```
+
+```
+[default]
+CSRF_SESSION_KEY = "s3cr37"
+JWT_SECRET_KEY = ""
+TELEGRAM_BOT_TOKEN = ""
+TELEGRAM_BOT_USERNAME = "@"
+BOT_HOST = ""
 ```
 
 ### migrate
 
 ```
 $ flask db init
-$ psql -U postgres
-psql (11.4)
-Type "help" for help.
-
-postgres=# create database fizzbuzz_db
 $ flask db migrate
 $ flask db upgrade
 ```
@@ -58,12 +66,22 @@ $ flask db upgrade
 $  flask run
 ```
 
+### docker-compose
+
+You can run the app using the docker-compose file.
+
 ```
-# secrets.toml
-[default]
-CSRF_SESSION_KEY = ""
-JWT_SECRET_KEY = ""
+$  docker-compose up --build
 ```
+
+### tests
+
+To run tests with coverage:
+
+```
+$  pytest --cov=fizzbuzz
+```
+
 
 ### references
 
