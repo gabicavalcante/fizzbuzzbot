@@ -3,6 +3,7 @@ import logging
 from flask import Blueprint, request, jsonify
 from dynaconf import settings
 from fizzbuzz.models import Chat
+from fizzbuzz.ext.database import db
 
 bot_blueprint = Blueprint("bot", __name__, url_prefix="/")
 logger = logging.getLogger(__name__)
@@ -35,7 +36,8 @@ def respond():
 
     response = get_response(text)
 
-    Chat.save(user, text, response, update)
+    Chat.save(user, text, response, update.to_json())
+    db.session.commit()
     bot.sendMessage(chat_id=chat_id, text=response, reply_to_message_id=msg_id)
 
     return jsonify({"message": "message send"}), 200
