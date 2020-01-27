@@ -36,6 +36,9 @@ def respond():
 
     response = get_response(text)
 
+    if len(text) > 280:
+        response = "The message must have 280 characters."
+
     Chat.save(user, text, response, update.to_json())
     db.session.commit()
     bot.sendMessage(chat_id=chat_id, text=response, reply_to_message_id=msg_id)
