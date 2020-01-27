@@ -8,6 +8,7 @@ from dynaconf import settings
 logger = logging.getLogger(__name__)
 
 
+# decorator to check authorization token
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):

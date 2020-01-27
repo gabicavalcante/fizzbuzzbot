@@ -12,7 +12,7 @@ def test_login(client):
     token = response.get_json()["token"]
     response = client.get("/chats/all", headers={"Authorization": f"Bearer {token}"})
 
-    assert response.status_code == HTTPStatus.OK, "Create chats fail"
+    assert response.status_code == HTTPStatus.OK, "Test chat authorization fail"
 
 
 def test_wrong_login(client):
@@ -21,6 +21,20 @@ def test_wrong_login(client):
     response = client.post("/auth/login", json=data)
 
     assert response.get_json() == {"message": "User error doesn't exist"}
+
+
+def test_invalid_header(client):
+    response = client.get("/chats/all", headers={"Authorization": ""})
+
+    assert response.get_json() == {"error": "Bearer is not in header"}
+    assert response.status_code == HTTPStatus.UNAUTHORIZED
+
+    response = client.get(
+        "/chats/all", headers={"Authorization": "Bearer invalid-token"}
+    )
+
+    assert response.get_json() == {"error": "Invalid Token Error"}
+    assert response.status_code == HTTPStatus.UNAUTHORIZED
 
 
 def test_verify_login():
