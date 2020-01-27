@@ -53,8 +53,7 @@ def respond():
 
 @bot_blueprint.route("/setwebhook", methods=["GET", "POST"])
 def set_webhook():
-    # we use the bot object to link the bot to our app which live
-    # in the link provided by URL
+    # link the bot to our app
     hook = "{URL}/{HOOK}".format(
         URL=settings.get("BOT_HOST"), HOOK=settings.get("TELEGRAM_BOT_TOKEN")
     )
