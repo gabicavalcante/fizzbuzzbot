@@ -20,6 +20,10 @@ answers = {
 
 
 def get_alternative_response(text: str) -> str:
+    """
+    If the message is not an integer, the method will check if
+    the bot has a default message.
+    """
     if text in answers:
         return answers[text]
     return f"Hey, '{text}' is not a valid input :("
