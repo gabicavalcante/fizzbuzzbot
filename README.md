@@ -4,11 +4,12 @@
 [![Code Coverage](https://codecov.io/gh/gabicavalcante/fizzbuzzbot/branch/master/graphs/badge.svg)](https://codecov.io/gh/gabicavalcante/fizzbuzzbot)
 [![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=gabicavalcante_fizzbuzzbot&metric=alert_status)](https://sonarcloud.io/dashboard?id=gabicavalcante_fizzbuzzbot)
 
-This is a simple python bot to response messages using FizzBuzz logic. Fo multiples of three, the bot response "Fizz", for the multiples of five, it response "Buzz". For numbers which are multiples of both three and five, response "FizzBizz". For any other number, it response the sent number. For any thing else, it reponse `Hey, '{text}' is not a valid input :(`.
+This is a simple python bot to response messages using FizzBuzz logic. For multiples of three, the bot response "Fizz", for the multiples of five, it response "Buzz". For numbers which are multiples of both three and five, it response "FizzBizz". For any other number, it response the number sent. For any thing else, it reponse `Hey, '{text}' is not a valid input :(`.
 
 ### about the project
 
-This project is a Flask API to response telegram messages. All messages are save in MySQL database, and see the data using the admin interface (`/admin`). For the tests, pytest was used.
+This project is a Flask API to response telegram messages. All messages are save in MySQL database, and you can see the data using the admin interface (`/admin`). To access this interface, you need create a user. You can do that running `flask add-user -u username -p password` (change `username` and `password` for your credential).
+
 You can find a docker-compose file that can be used to run the flask api and mysql db.
 
 ### python code formartter
