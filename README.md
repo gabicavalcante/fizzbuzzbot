@@ -8,7 +8,7 @@ This is a simple python bot to response messages using FizzBuzz logic. For multi
 
 ### about the project
 
-This project is a Flask API to response telegram messages. All messages are save in MySQL database, and you can see the data using the admin interface (`/admin`). To access this interface, you need create a user. You can do that running `flask add-user -u username -p password` (change `username` and `password` for your credential).
+This project is a Flask API to response telegram messages. All messages are save in MySQL database, and you can see the data using the admin interface (`/admin`). To access this interface, you need create a user. You can do that running `flask add-user -u username -p password` (change `username` and `password` for your credential). That user that you created, can be used to request a token, to access the REST API to get all messages datas (`/chats/all` and `/chats/<int:id>` are the endpoints).
 
 You can find a docker-compose file that can be used to run the flask api and mysql db.
 
