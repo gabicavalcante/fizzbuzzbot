@@ -14,6 +14,11 @@ if settings.current_env != "ci":
 
 
 def get_response(text: str) -> str:
+    """
+    Check if the message is a integer multiples of three, five or both.
+    :return: "Fizz" "Buzz" or "FizzBuzz"
+    :except: if the message is not an integer
+    """
     try:
         number = int(text)
         return "Fizz" * (number % 3 == 0) + "Buzz" * (number % 5 == 0) or number
