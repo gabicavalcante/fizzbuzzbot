@@ -13,6 +13,18 @@ if settings.current_env != "ci":
     bot = telegram.Bot(token=settings.get("TELEGRAM_BOT_TOKEN"))
 
 
+answers = {
+    "/start": "Hey, send me a integer, and I'll do my work ;)",
+    "/help": "My work is check if the message is a integer multiples of three (Fizz), five (Buzz) or both (FizzBuzz).",
+}
+
+
+def get_alternative_response(text: str) -> str:
+    if text in answers:
+        return answers[text]
+    return f"Hey, '{text}' is not a valid input :("
+
+
 def get_response(text: str) -> str:
     """
     Check if the message is a integer multiples of three, five or both.
@@ -23,7 +35,7 @@ def get_response(text: str) -> str:
         number = int(text)
         return "Fizz" * (number % 3 == 0) + "Buzz" * (number % 5 == 0) or number
     except ValueError:
-        return f"Hey, '{text}' is not a valid input :("
+        return get_alternative_response(text)
 
 
 @bot_blueprint.route(f"/{settings.get('TELEGRAM_BOT_TOKEN')}", methods=["POST"])
@@ -37,7 +49,7 @@ def respond():
 
     # Telegram understands UTF-8, so encode text for unicode compatibility
     text = update.message.text.encode("utf-8").decode()
-    logger.info("Update received! {text}")
+    logger.info(f"Update received: {text}")
 
     response = get_response(text)
 

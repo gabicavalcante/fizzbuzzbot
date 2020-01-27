@@ -21,7 +21,7 @@ EXTENSIONS = [
 DEVELOPMENT = true
 DEBUG = true
 SQLALCHEMY_TRACK_MODIFICATIONS = true
-SQLALCHEMY_DATABASE_URI="mysql://root:p@ssw0rd123@db/fizzbuzz" 
+SQLALCHEMY_DATABASE_URI="mysql://root:p@ssw0rd123@0.0.0.0:3306/fizzbuzz" 
 
 [staging]
 DEVELOPMENT = true
