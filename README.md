@@ -39,25 +39,7 @@ You can find a docker-compose file that can be used to run the flask api and mys
 
 - [sonar](https://sonarcloud.io/dashboard?id=gabicavalcante_fizzbuzzbot)
 
-### create and active virtualenv
-
-```
-# virtualenv
-$ virtualenv -p python3 env
-$ source env/bin/activate
-# pyenv
-$ pyenv virtualenv 3.7.4 fizzbuzz
-$ pyenv activate fizzbuzz
-```
-
-### install requirements
-
-```
-$ cd fizzbuzz
-$ pip install -r requirements-dev.txt
-```
-
-_note_: `requirements-dev.txt` has all requirements packages to test, coverage and lint. If you don't want this packages, just run `pip install -r requirements.txt`.
+## setup
 
 ### create and configure .env file
 
@@ -81,26 +63,13 @@ $ cp .secrets.toml.sample .secrets.toml
 
 ```
 [default]
-CSRF_SESSION_KEY = "s3cr37"
+CSRF_SESSION_KEY = ""
 JWT_SECRET_KEY = ""
 TELEGRAM_BOT_TOKEN = ""
-TELEGRAM_BOT_USERNAME = "@"
-BOT_HOST = ""
+BOT_HOST = "https://"
 ```
 
-### migrate
-
-```
-$ flask db init
-$ flask db migrate
-$ flask db upgrade
-```
-
-### run
-
-```
-$  flask run
-```
+## run
 
 ### docker-compose
 
@@ -110,7 +79,46 @@ You can run the app using the docker-compose file.
 $  docker-compose up --build
 ```
 
-### tests
+To test, run `ngrok` to expose your local server, and set `BOT_HOST` with the ngrok url. Access `127.0.0.1:5000/setwebhook` to start the webhook, and now you can use your bot. o/
+You can see all message accessing `127.0.0.1:5000/admin`, the docker-compose created a user with username `admin` and password `admin`.
+
+### flask run
+
+#### virtualenv
+
+```
+# virtualenv
+$ virtualenv -p python3 env
+$ source env/bin/activate
+# pyenv
+$ pyenv virtualenv 3.7.4 fizzbuzz
+$ pyenv activate fizzbuzz
+```
+
+#### install requirements
+
+```
+$ cd fizzbuzz
+$ pip install -r requirements-dev.txt
+```
+
+_note_: `requirements-dev.txt` has all requirements packages to test, coverage and lint. If you don't want this packages, just run `pip install -r requirements.txt`.
+
+#### migrate
+
+```
+$ flask db init
+$ flask db migrate
+$ flask db upgrade
+```
+
+#### run
+
+```
+$  flask run
+```
+
+## tests
 
 To run tests with coverage:
 
