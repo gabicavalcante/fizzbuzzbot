@@ -150,7 +150,13 @@ $  flask run
 
 ## tests
 
-To run tests with coverage:
+Start the test db:
+
+```
+$  docker-compose up dbtest
+```
+
+To run tests with coverage
 
 ```
 $  pytest --cov=fizzbuzz
