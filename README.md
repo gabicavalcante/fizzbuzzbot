@@ -74,6 +74,10 @@ TELEGRAM_BOT_TOKEN = ""
 BOT_HOST = "https://"
 ```
 
+### configure the .settings.toml
+
+Open the .settings.toml file and check all variables. See if you want change any thing. I set the `SQLALCHEMY_DATABASE_URI` to connect with the mysql credentials that I defined in docker-compose file. If you change one of these files, remenber to change other.
+
 ## run
 
 ### docker-compose
