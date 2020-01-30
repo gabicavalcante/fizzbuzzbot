@@ -37,7 +37,7 @@ def get_response(text: str) -> str:
     """
     try:
         number = int(text)
-        return "Fizz" * (number % 3 == 0) + "Buzz" * (number % 5 == 0) or number
+        return "Fizz" * (number % 3 == 0) + "Buzz" * (number % 5 == 0) or str(number)
     except ValueError:
         return get_alternative_response(text)
 
